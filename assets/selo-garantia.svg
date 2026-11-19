@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 340" role="img" aria-label="Selo de garantia E-commerce Million">
+<defs>
+ <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0bf"/><stop offset=".22" stop-color="#e9c46a"/><stop offset=".5" stop-color="#b8862f"/><stop offset=".72" stop-color="#f1d07f"/><stop offset="1" stop-color="#8a5f1c"/></linearGradient>
+ <linearGradient id="g2" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#7a5418"/><stop offset=".45" stop-color="#e2b65a"/><stop offset=".6" stop-color="#fff0bf"/><stop offset="1" stop-color="#a87828"/></linearGradient>
+ <radialGradient id="disc" cx="45%" cy="35%" r="70%"><stop offset="0" stop-color="#231a0e"/><stop offset=".7" stop-color="#0d0a06"/><stop offset="1" stop-color="#050403"/></radialGradient>
+ <linearGradient id="shL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff2c6"/><stop offset=".5" stop-color="#e6bf63"/><stop offset="1" stop-color="#b8862f"/></linearGradient>
+ <linearGradient id="shR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9ab4f"/><stop offset=".6" stop-color="#a87526"/><stop offset="1" stop-color="#6e4b14"/></linearGradient>
+ <linearGradient id="rib" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#140f09"/><stop offset=".5" stop-color="#2a2014"/><stop offset="1" stop-color="#0c0906"/></linearGradient>
+ <filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000" flood-opacity=".65"/></filter>
+ <filter id="emb"><feDropShadow dx="0" dy="1.5" stdDeviation=".6" flood-color="#000" flood-opacity=".6"/></filter>
+ <path id="arcT" d="M74,150 a86,86 0 1,1 172,0"/>
+ <path id="arcB" d="M62,150 a98,98 0 0,0 196,0"/>
+</defs>
+<g filter="url(#sh)">
+ <!-- ribbons -->
+ <path d="M112 215 L72 322 L98 308 L112 336 L150 236 Z" fill="url(#rib)" stroke="url(#g1)" stroke-width="2.5"/>
+ <path d="M208 215 L248 322 L222 308 L208 336 L170 236 Z" fill="url(#rib)" stroke="url(#g1)" stroke-width="2.5"/>
+ <path d="M118 228 L86 312" stroke="#d4a64a" stroke-opacity=".35" stroke-width="1"/>
+ <path d="M202 228 L234 312" stroke="#d4a64a" stroke-opacity=".35" stroke-width="1"/>
+ <!-- rosette -->
+ <g fill="url(#g1)"><circle cx="278.00" cy="150.00" r="15"/><circle cx="275.04" cy="176.26" r="15"/><circle cx="266.31" cy="201.20" r="15"/><circle cx="252.26" cy="223.57" r="15"/><circle cx="233.57" cy="242.26" r="15"/><circle cx="211.20" cy="256.31" r="15"/><circle cx="186.26" cy="265.04" r="15"/><circle cx="160.00" cy="268.00" r="15"/><circle cx="133.74" cy="265.04" r="15"/><circle cx="108.80" cy="256.31" r="15"/><circle cx="86.43" cy="242.26" r="15"/><circle cx="67.74" cy="223.57" r="15"/><circle cx="53.69" cy="201.20" r="15"/><circle cx="44.96" cy="176.26" r="15"/><circle cx="42.00" cy="150.00" r="15"/><circle cx="44.96" cy="123.74" r="15"/><circle cx="53.69" cy="98.80" r="15"/><circle cx="67.74" cy="76.43" r="15"/><circle cx="86.43" cy="57.74" r="15"/><circle cx="108.80" cy="43.69" r="15"/><circle cx="133.74" cy="34.96" r="15"/><circle cx="160.00" cy="32.00" r="15"/><circle cx="186.26" cy="34.96" r="15"/><circle cx="211.20" cy="43.69" r="15"/><circle cx="233.57" cy="57.74" r="15"/><circle cx="252.26" cy="76.43" r="15"/><circle cx="266.31" cy="98.80" r="15"/><circle cx="275.04" cy="123.74" r="15"/><circle cx="160" cy="150" r="118"/></g>
+ <circle cx="160" cy="150" r="112" fill="none" stroke="#7a5418" stroke-opacity=".55" stroke-width="1.2"/>
+ <circle cx="160" cy="150" r="110" fill="url(#g2)"/>
+ <circle cx="160" cy="150" r="106" fill="none" stroke="#5e3f0e" stroke-opacity=".6" stroke-width="2.5" stroke-dasharray="1.2 3.2"/>
+ <circle cx="160" cy="150" r="100" fill="url(#disc)" stroke="#f3d58a" stroke-width="1.5"/>
+ <circle cx="160" cy="150" r="72" fill="none" stroke="#d4a64a" stroke-opacity=".45" stroke-width="1"/>
+ <text font-family="Marcellus,Georgia,serif" font-size="15" letter-spacing="5" fill="#f3d58a" text-anchor="middle"><textPath href="#arcT" startOffset="50%">GARANTIA</textPath></text>
+ <text font-family="Inter,Arial,sans-serif" font-weight="600" font-size="9.5" letter-spacing="3.4" fill="#d4a64a" text-anchor="middle"><textPath href="#arcB" startOffset="50%">E-COMMERCE MILLION</textPath></text>
+ <g fill="#f3d58a"><circle cx="68" cy="156" r="2"/><circle cx="252" cy="156" r="2"/></g>
+ <!-- shield -->
+ <g filter="url(#emb)">
+  <path d="M160 92 C176 102 194 106 210 106 C210 150 194 184 160 206 Z" fill="url(#shR)"/>
+  <path d="M160 92 C144 102 126 106 110 106 C110 150 126 184 160 206 Z" fill="url(#shL)"/>
+  <path d="M160 92 C176 102 194 106 210 106 C210 150 194 184 160 206 C126 184 110 150 110 106 C126 106 144 102 160 92 Z" fill="none" stroke="#fff3cc" stroke-opacity=".7" stroke-width="1.5"/>
+  <path d="M160 104 C173 112 187 115 199 116 C198 151 186 178 160 194 C134 178 122 151 121 116 C133 115 147 112 160 104 Z" fill="none" stroke="#6e4b14" stroke-opacity=".45" stroke-width="1"/>
+ </g>
+ <path d="M136 150 L154 168 L188 128" fill="none" stroke="#120d07" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M136 148 L154 166 L188 126" fill="none" stroke="#2a1d0c" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+ <!-- shine -->
+ <path d="M80 90 A100 100 0 0 1 180 52" stroke="#fff" stroke-opacity=".18" stroke-width="5" fill="none" stroke-linecap="round"/>
+</g>
+</svg>
