@@ -344,6 +344,49 @@ body{background-color:#030303!important;background-image:url("data:image/svg+xml
 .pedestal::before{background:linear-gradient(180deg,rgba(255,215,140,.08),transparent)!important}
 @media (max-width:820px){.hero{background:#030303!important}.hero .photo::after{background:linear-gradient(180deg,rgba(3,3,3,.15) 0%,rgba(3,3,3,0) 18%,rgba(3,3,3,0) 34%,rgba(3,3,3,.85) 56%,#030303 72%)!important}}
 @media (max-width:820px) and (max-height:720px){.hero .photo::after{background:linear-gradient(180deg,rgba(3,3,3,.1) 0%,rgba(3,3,3,0) 30%,rgba(3,3,3,.75) 78%,#030303 100%)!important}}
+
+/* quiz */
+html.qz-lock,html.qz-lock body{overflow:hidden}
+.qz{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .25s}
+.qz.on{opacity:1}
+.qz[hidden]{display:none}
+.qz-box{width:100%;max-width:560px;max-height:calc(100svh - 40px);overflow:auto;background:#0b0b0a;border:1px solid #2a251c;border-radius:4px;padding:22px 28px 30px;transform:translateY(12px);transition:transform .25s}
+.qz.on .qz-box{transform:none}
+.qz-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.qz-back,.qz-close{background:none;border:0;color:var(--mut);font:500 13px Inter,sans-serif;cursor:pointer;padding:6px 0}
+.qz-back:hover,.qz-close:hover{color:var(--gold2)}
+.qz-close{font-size:16px;padding:6px 4px}
+.qz-count{color:var(--gold);font:600 11px Inter,sans-serif;letter-spacing:.22em;text-transform:uppercase}
+.qz-bar{height:2px;background:#1f1c17;margin-bottom:26px}
+.qz-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#b88a33,#f3d58a);transition:width .35s ease}
+.qz-step{animation:qzIn .3s ease}
+@keyframes qzIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.qz-q{font-family:Marcellus,Georgia,serif;font-weight:400;font-size:27px;line-height:1.2;margin-bottom:8px}
+.qz-sub{color:var(--mut);font-size:15px;margin-bottom:6px}
+.qz-opts{display:grid;gap:10px;margin-top:20px}
+.qz-opt{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:#121110;border:1px solid #2a251c;border-radius:3px;padding:15px 16px;color:var(--txt);font:500 16px Inter,sans-serif;cursor:pointer;transition:border-color .15s,background .15s}
+.qz-opt span{flex:none;width:28px;height:28px;display:grid;place-items:center;border:1px solid #4a3d24;color:var(--gold2);font:600 12px Inter;border-radius:2px}
+.qz-opt:hover,.qz-opt:focus-visible{border-color:var(--gold);outline:0}
+.qz-opt.sel{border-color:var(--gold);background:#1a160e}
+.qz-opt.sel span{background:var(--gold);color:#1a1205;border-color:var(--gold)}
+.qz-in{width:100%;margin-top:20px;background:#121110;border:1px solid #2a251c;border-radius:3px;padding:16px;color:var(--txt);font:400 17px Inter,sans-serif;resize:vertical}
+.qz-in:focus{outline:0;border-color:var(--gold)}
+.qz-next{width:100%;margin-top:16px}
+.qz-hint{color:#6f6a60;font-size:12px;text-align:center;margin-top:10px}
+.qz-err{color:#e2574c;font-size:13.5px;min-height:18px;margin-top:8px}
+.qz-check{display:flex;gap:12px;align-items:flex-start;margin-top:20px;padding:16px;border:1px solid #2a251c;background:#121110;border-radius:3px;color:#cfc8ba;font-size:14.5px;cursor:pointer}
+.qz-check input{width:20px;height:20px;accent-color:#d4a64a;flex:none;margin-top:1px}
+.qz-done{text-align:center;padding:10px 0}
+.qz-done img{margin:0 auto 14px}
+.quiz-intro{text-align:center}
+.qi-list{display:flex;justify-content:space-between;gap:10px;margin-bottom:18px;color:var(--gold2);font:600 11px Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase}
+.quiz-intro p{color:var(--mut);margin-bottom:6px}
+@media (max-width:820px){
+  .qz{padding:0;align-items:stretch}
+  .qz-box{max-width:none;max-height:none;height:100%;border:0;border-radius:0;padding:16px 16px 28px}
+  .qz-q{font-size:24px}
+  .qi-list{flex-direction:column;align-items:center}
+}
 </style>
 </head>
 <body>
@@ -549,17 +592,11 @@ body{background-color:#030303!important;background-image:url("data:image/svg+xml
   <div class="wrap">
     <div class="center"><span class="eyebrow">Guia Estratégico</span></div>
     <h2 class="h2">Garanta seu <span class="gold">Guia Estratégico do E-commerce Million</span></h2>
-    <p class="lead">Responda 4 perguntas rápidas. O time do Fabrício analisa sua conta e te envia no WhatsApp o plano de 4 semanas com o próximo passo.</p>
-    <div class="fbox">
-      <div class="steps"><i class="on"></i><i class="on"></i><i></i><i></i></div>
-      <div class="q">Quanto sua conta fatura por mês hoje?</div>
-      <div class="qs">Etapa 2 de 4 · é só tocar em uma opção</div>
-      <div class="opt"><i></i>Ainda não vendo</div>
-      <div class="opt"><i></i>Até R$ 10 mil/mês</div>
-      <div class="opt sel"><i></i>De R$ 10 mil a R$ 50 mil/mês</div>
-      <div class="opt"><i></i>De R$ 50 mil a R$ 200 mil/mês</div>
-      <div class="opt"><i></i>Acima de R$ 200 mil/mês</div>
-      <a class="btn" href="#">Continuar para garantir meu guia →</a>
+    <p class="lead">Responda algumas perguntas rápidas. O time do Fabrício analisa seu cenário e te chama no WhatsApp com o plano de 4 semanas e o próximo passo.</p>
+    <div class="fbox quiz-intro">
+      <div class="qi-list"><span>I · Seu cenário</span><span>II · Seu contato</span><span>III · Seu guia</span></div>
+      <p>São 8 perguntas rápidas, uma de cada vez. Leva menos de 1 minuto.</p>
+      <a class="btn" href="#form">Começar agora →</a>
       <div class="seal-mini"><img src="assets/selo-garantia.svg" alt=""><span>Seus dados estão seguros · não enviamos spam</span></div>
     </div>
   </div>
@@ -596,8 +633,80 @@ body{background-color:#030303!important;background-image:url("data:image/svg+xml
 <script>
 (function(){var st=document.getElementById('sticky'),hero=document.getElementById('heroCta'),form=document.getElementById('form');var hv=true,fv=false;
 function up(){st.classList.toggle('show',!hv&&!fv)}
-if('IntersectionObserver' in window){new IntersectionObserver(function(e){hv=e[0].isIntersecting;up()}).observe(hero);new IntersectionObserver(function(e){fv=e[0].isIntersecting;up()},{threshold:.25}).observe(form)}else{st.classList.add('show')}
-document.querySelectorAll('a[href="#form"]').forEach(function(a){a.addEventListener('click',function(ev){ev.preventDefault();window.scrollTo({top:form.getBoundingClientRect().top+scrollY-64,behavior:'smooth'})})})})();
+if('IntersectionObserver' in window){new IntersectionObserver(function(e){hv=e[0].isIntersecting;up()}).observe(hero);new IntersectionObserver(function(e){fv=e[0].isIntersecting;up()},{threshold:.25}).observe(form)}else{st.classList.add('show')}})();
+</script>
+
+<!-- QUIZ MODAL -->
+<div class="qz" id="quiz" role="dialog" aria-modal="true" aria-labelledby="qzTitle" hidden>
+  <div class="qz-box">
+    <div class="qz-head">
+      <button class="qz-back" id="qzBack" type="button" aria-label="Voltar">← Voltar</button>
+      <span class="qz-count" id="qzCount"></span>
+      <button class="qz-close" id="qzClose" type="button" aria-label="Fechar">✕</button>
+    </div>
+    <div class="qz-bar"><i id="qzBar"></i></div>
+    <div class="qz-body" id="qzBody"></div>
+  </div>
+</div>
+
+<script>
+/* ===== CONFIGURAÇÃO DO ENVIO =====
+   WHATSAPP: número do comercial com DDI+DDD, só números (ex.: 5511999999999). Ao concluir, o lead é levado ao WhatsApp com as respostas.
+   WEBHOOK:  URL que recebe as respostas em JSON (CRM, Zapier, Make, n8n...). Pode usar os dois. */
+var QUIZ_CONFIG={WHATSAPP:'',WEBHOOK:''};
+
+(function(){
+var Q=[
+ {id:'vende',t:'Você já vende no Mercado Livre ou na Shopee?',type:'choice',o:['Sim, no Mercado Livre','Sim, na Shopee','Sim, nos dois','Ainda não vendo']},
+ {id:'segmento',t:'Qual é o seu segmento?',type:'choice',o:['Autopeças','Casa e decoração','Eletrônicos e acessórios','Moda e calçados','Beleza e saúde','Outro segmento']},
+ {id:'fornecedor',t:'Você já tem fornecedor ou estoque pronto?',type:'choice',o:['Sim, já tenho','Estou negociando','Ainda não tenho']},
+ {id:'trava',t:'Qual é a sua maior trava hoje?',type:'choice',o:['Vendas paradas, não saem do lugar','Ads caro, queimando dinheiro','Reputação amarela ou laranja','Margem baixa, vendo e não lucro','Anúncios que não convertem','Operação e envios no caos']},
+ {id:'trava_det',t:'Quer contar um pouco mais sobre essa trava?',sub:'Opcional. Ajuda o time a chegar com o direcionamento certo.',type:'textarea',ph:'Ex.: vendo bem há 6 meses, mas o faturamento parou em...',opt:true},
+ {id:'nome',t:'Qual é o seu nome?',type:'text',ph:'Seu nome',auto:'name'},
+ {id:'whatsapp',t:'Qual é o seu WhatsApp com DDD?',sub:'É por aqui que o time vai te enviar o direcionamento.',type:'tel',ph:'(11) 99999-9999',auto:'tel'},
+ {id:'consent',t:'Tudo certo, {nome}! Posso enviar seu Guia Estratégico?',type:'consent'}
+];
+var A={},i=0,m=document.getElementById('quiz'),body=document.getElementById('qzBody'),bar=document.getElementById('qzBar'),cnt=document.getElementById('qzCount'),back=document.getElementById('qzBack'),lastFocus=null;
+function esc(x){return String(x).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function maskTel(v){v=v.replace(/\D/g,'').slice(0,11);if(v.length>10)return'('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);if(v.length>6)return'('+v.slice(0,2)+') '+v.slice(2,6)+'-'+v.slice(6);if(v.length>2)return'('+v.slice(0,2)+') '+v.slice(2);return v.length?'('+v:v}
+function render(){
+ var q=Q[i];bar.style.width=((i)/Q.length*100)+'%';cnt.textContent='Pergunta '+(i+1)+' de '+Q.length;back.style.visibility=i?'visible':'hidden';
+ var t=esc(q.t).replace('{nome}',esc((A.nome||'').split(' ')[0]));
+ var h='<h3 class="qz-q" id="qzTitle">'+t+'</h3>'+(q.sub?'<p class="qz-sub">'+esc(q.sub)+'</p>':'');
+ if(q.type==='choice'){h+='<div class="qz-opts">'+q.o.map(function(o,k){return'<button type="button" class="qz-opt'+(A[q.id]===o?' sel':'')+'" data-v="'+esc(o)+'"><span>'+String.fromCharCode(65+k)+'</span>'+esc(o)+'</button>'}).join('')+'</div>'}
+ else if(q.type==='consent'){h+='<label class="qz-check"><input type="checkbox" id="qzCk"'+(A.consent?' checked':'')+'> <span>Concordo em fornecer meus dados para receber conteúdos e ofertas por WhatsApp, e-mail ou outros meios.</span></label><div class="qz-err" id="qzErr"></div><button type="button" class="btn qz-next" id="qzSend">Garantir meu Guia Estratégico →</button>'}
+ else{var tag=q.type==='textarea'?'textarea':'input';h+='<'+tag+' class="qz-in" id="qzIn" '+(tag==='input'?'type="'+(q.type==='tel'?'tel':'text')+'" inputmode="'+(q.type==='tel'?'numeric':'text')+'" autocomplete="'+(q.auto||'off')+'"':'rows="4"')+' placeholder="'+esc(q.ph||'')+'">'+(tag==='textarea'?esc(A[q.id]||''):'')+(tag==='input'?'':'</textarea>')+'<div class="qz-err" id="qzErr"></div><button type="button" class="btn qz-next" id="qzNext">'+(q.opt?'Continuar (ou pular) →':'Continuar →')+'</button><p class="qz-hint">ou pressione Enter ↵</p>'}
+ body.innerHTML='<div class="qz-step">'+h+'</div>';
+ var inp=document.getElementById('qzIn');
+ if(inp){if(inp.tagName==='INPUT')inp.value=A[q.id]||'';if(q.type==='tel')inp.addEventListener('input',function(){inp.value=maskTel(inp.value)});
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&(inp.tagName==='INPUT'||!e.shiftKey)){e.preventDefault();next()}});setTimeout(function(){inp.focus()},60);
+  document.getElementById('qzNext').onclick=next}
+ body.querySelectorAll('.qz-opt').forEach(function(b){b.onclick=function(){A[q.id]=b.getAttribute('data-v');body.querySelectorAll('.qz-opt').forEach(function(x){x.classList.remove('sel')});b.classList.add('sel');setTimeout(function(){go(1)},260)}});
+ var sb=document.getElementById('qzSend');if(sb)sb.onclick=submit;
+ if(!inp){var f=body.querySelector('.qz-opt,.qz-check input');if(f)setTimeout(function(){f.focus({preventScroll:true})},60)}
+}
+function err(t){var e=document.getElementById('qzErr');if(e)e.textContent=t}
+function next(){var q=Q[i],v=(document.getElementById('qzIn').value||'').trim();
+ if(!q.opt&&!v)return err('Preencha para continuar.');
+ if(q.type==='tel'&&v.replace(/\D/g,'').length<10)return err('Digite o WhatsApp com DDD.');
+ if(q.id==='nome'&&v.length<2)return err('Digite seu nome.');
+ A[q.id]=v;go(1)}
+function go(d){i=Math.max(0,Math.min(Q.length-1,i+d));render()}
+function submit(){var ck=document.getElementById('qzCk');if(!ck.checked)return err('Marque a caixa para receber seu guia.');A.consent=true;
+ var data={nome:A.nome,whatsapp:A.whatsapp,vende:A.vende,segmento:A.segmento,fornecedor:A.fornecedor,trava:A.trava,trava_detalhe:A.trava_det||'',origem:location.href,data:new Date().toISOString()};
+ try{(window.dataLayer=window.dataLayer||[]).push({event:'lead_quiz',lead:{segmento:data.segmento,vende:data.vende}})}catch(e){}
+ if(QUIZ_CONFIG.WEBHOOK){try{fetch(QUIZ_CONFIG.WEBHOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(data),keepalive:true})}catch(e){}}
+ bar.style.width='100%';cnt.textContent='Concluído';back.style.visibility='hidden';
+ var wa='';if(QUIZ_CONFIG.WHATSAPP){var msg='Olá! Quero meu Guia Estratégico do E-commerce Million.\n\nNome: '+data.nome+'\nWhatsApp: '+data.whatsapp+'\nVende no ML/Shopee: '+data.vende+'\nSegmento: '+data.segmento+'\nFornecedor/estoque: '+data.fornecedor+'\nMaior trava: '+data.trava+(data.trava_detalhe?'\nDetalhe: '+data.trava_detalhe:'');wa='https://wa.me/'+QUIZ_CONFIG.WHATSAPP+'?text='+encodeURIComponent(msg)}
+ body.innerHTML='<div class="qz-step qz-done"><img src="assets/selo-garantia.svg" alt="" width="110"><h3 class="qz-q">Recebemos, '+esc(data.nome.split(' ')[0])+'!</h3><p class="qz-sub">O time do Fabrício vai analisar seu cenário e te chamar no WhatsApp <b>'+esc(data.whatsapp)+'</b> com o seu Guia Estratégico.</p>'+(wa?'<a class="btn qz-next" href="'+wa+'" target="_blank" rel="noopener">Falar agora no WhatsApp →</a>':'')+'</div>';
+ if(wa)setTimeout(function(){window.open(wa,'_blank')},900)}
+function open(){lastFocus=document.activeElement;m.hidden=false;document.documentElement.classList.add('qz-lock');requestAnimationFrame(function(){m.classList.add('on')});if(cnt.textContent!=='Concluído')render()}
+function close(){m.classList.remove('on');document.documentElement.classList.remove('qz-lock');setTimeout(function(){m.hidden=true},250);if(lastFocus)lastFocus.focus({preventScroll:true})}
+document.querySelectorAll('a[href="#form"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();open()})});
+back.onclick=function(){go(-1)};document.getElementById('qzClose').onclick=close;
+m.addEventListener('click',function(e){if(e.target===m)close()});
+document.addEventListener('keydown',function(e){if(!m.hidden&&e.key==='Escape')close()});
+})();
 </script>
 </body>
 </html>
