@@ -299,6 +299,27 @@ body{background-color:#090705;background-image:radial-gradient(120% 70% at 50% 0
 .seal-mini{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:18px;color:var(--mut);font-size:13px}
 .seal-mini img{width:46px}
 @media (max-width:820px){.seal-box{flex-direction:column;text-align:center}.seal-box img{width:150px}}
+
+/* mobile: foto do expert em tela cheia */
+@media (max-width:820px){
+  .hero{position:relative;padding:0;min-height:calc(100svh - 52px);display:flex;overflow:hidden}
+  .hero>.wrap{padding:0;width:100%;display:flex}
+  .hero .grid{display:flex!important;flex-direction:column;justify-content:flex-end;width:100%;gap:0}
+  .hero .photo{position:absolute!important;inset:0;height:auto!important;max-height:none!important;min-height:0!important;border:0!important;border-radius:0!important;margin:0!important;background:#0b0907}
+  .hero .photo img{border-radius:0!important;height:100%;width:100%;object-fit:cover;object-position:center top!important}
+  .hero .photo::after{border-radius:0!important;background:linear-gradient(180deg,rgba(9,7,5,.15) 0%,rgba(9,7,5,0) 18%,rgba(9,7,5,0) 34%,rgba(9,7,5,.82) 56%,#090705 72%)!important}
+  .htext{position:relative;z-index:2;padding:0 16px 22px}
+  .hero h1{text-shadow:0 2px 18px rgba(0,0,0,.6)}
+}
+
+@media (max-width:820px) and (max-height:720px){
+  .hero{background:#090705!important}
+  .hero .photo{bottom:36%!important}
+  .hero .photo::after{background:linear-gradient(180deg,rgba(9,7,5,.1) 0%,rgba(9,7,5,0) 30%,rgba(9,7,5,.7) 78%,#090705 100%)!important}
+}
+@media (max-width:380px){
+  .btn{letter-spacing:.08em;font-size:14px;padding:17px 14px;white-space:nowrap}
+}
 </style>
 </head>
 <body>
