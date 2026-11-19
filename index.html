@@ -652,10 +652,8 @@ if('IntersectionObserver' in window){new IntersectionObserver(function(e){hv=e[0
 </div>
 
 <script>
-/* ===== CONFIGURAÇÃO DO ENVIO =====
-   WHATSAPP: número do comercial com DDI+DDD, só números (ex.: 5511999999999). Ao concluir, o lead é levado ao WhatsApp com as respostas.
-   WEBHOOK:  URL que recebe as respostas em JSON (CRM, Zapier, Make, n8n...). Pode usar os dois. */
-var QUIZ_CONFIG={WHATSAPP:'',WEBHOOK:''};
+/* Leads salvos no Supabase (V8 OSS), tabela leads_ecommercemillion. WEBHOOK opcional (CRM, Zapier, Make...). */
+var QUIZ_CONFIG={SUPABASE_URL:'https://hmnhcinkmfwtutkbxejb.supabase.co',SUPABASE_KEY:'sb_publishable_U-B2cBm468M1lHoGZIzSnA_lmBsWe1S',TABLE:'leads_ecommercemillion',WEBHOOK:''};
 
 (function(){
 var Q=[
@@ -693,13 +691,17 @@ function next(){var q=Q[i],v=(document.getElementById('qzIn').value||'').trim();
  A[q.id]=v;if(q.last)return submit();go(1)}
 function go(d){i=Math.max(0,Math.min(Q.length-1,i+d));render()}
 function submit(){
- var data={nome:A.nome,whatsapp:A.whatsapp,vende:A.vende,segmento:A.segmento,fornecedor:A.fornecedor,trava:A.trava,trava_detalhe:A.trava_det||'',origem:location.href,data:new Date().toISOString()};
- try{(window.dataLayer=window.dataLayer||[]).push({event:'lead_quiz',lead:{segmento:data.segmento,vende:data.vende}})}catch(e){}
- if(QUIZ_CONFIG.WEBHOOK){try{fetch(QUIZ_CONFIG.WEBHOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(data),keepalive:true})}catch(e){}}
- var wa='';if(QUIZ_CONFIG.WHATSAPP){var msg='Olá! Quero meu Guia Estratégico do E-commerce Million.\n\nNome: '+data.nome+'\nWhatsApp: '+data.whatsapp+'\nVende no ML/Shopee: '+data.vende+'\nSegmento: '+data.segmento+'\nFornecedor/estoque: '+data.fornecedor+'\nMaior trava: '+data.trava+(data.trava_detalhe?'\nDetalhe: '+data.trava_detalhe:'');wa='https://wa.me/'+QUIZ_CONFIG.WHATSAPP+'?text='+encodeURIComponent(msg)}
- try{sessionStorage.setItem('em_lead',JSON.stringify({nome:data.nome,whatsapp:data.whatsapp,wa:wa}))}catch(e){}
+ var u=new URLSearchParams(location.search),g=function(k){return u.get(k)||null};
+ var row={nome:A.nome||null,whatsapp:A.whatsapp||null,vende:A.vende||null,segmento:A.segmento||null,fornecedor:A.fornecedor||null,trava:A.trava||null,trava_detalhe:A.trava_det||null,evento:null,page:'lp01-guia-estrategico',utm_source:g('utm_source'),utm_medium:g('utm_medium'),utm_campaign:g('utm_campaign'),utm_content:g('utm_content'),utm_term:g('utm_term'),fbclid:g('fbclid'),gclid:g('gclid')};
+ try{(window.dataLayer=window.dataLayer||[]).push({event:'lead',pagina:'lp01-guia-estrategico',segmento:row.segmento})}catch(e){}
+ try{if(window.fbq)fbq('track','Lead')}catch(e){}
+ try{sessionStorage.setItem('em_lead',JSON.stringify({nome:row.nome,whatsapp:row.whatsapp}))}catch(e){}
  var nb=document.getElementById('qzNext');if(nb){nb.disabled=true;nb.textContent='Enviando…'}
- setTimeout(function(){location.href='obrigado.html'},350)}
+ var done=false;function go(){if(done)return;done=true;location.href='obrigado.html'}
+ var sends=[];
+ try{sends.push(fetch(QUIZ_CONFIG.SUPABASE_URL+'/rest/v1/'+QUIZ_CONFIG.TABLE,{method:'POST',keepalive:true,headers:{'apikey':QUIZ_CONFIG.SUPABASE_em_lead,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(row)}))}catch(e){}
+ if(QUIZ_CONFIG.WEBHOOK){try{sends.push(fetch(QUIZ_CONFIG.WEBHOOK,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain'},body:JSON.stringify(row)}))}catch(e){}}
+ Promise.all(sends.map(function(p){return p.catch(function(){})})).then(go);setTimeout(go,2500)}
 function open(){lastFocus=document.activeElement;m.hidden=false;document.documentElement.classList.add('qz-lock');requestAnimationFrame(function(){m.classList.add('on')});render()}
 function close(){m.classList.remove('on');document.documentElement.classList.remove('qz-lock');setTimeout(function(){m.hidden=true},250);if(lastFocus)lastFocus.focus({preventScroll:true})}
 document.querySelectorAll('a[href="#form"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();open()})});
