@@ -597,7 +597,7 @@ html.qz-lock,html.qz-lock body{overflow:hidden}
     <p class="lead">Responda algumas perguntas rápidas. O time do Fabrício analisa seu cenário e te chama no WhatsApp com o plano de 4 semanas e o próximo passo.</p>
     <div class="fbox quiz-intro">
       <div class="qi-list"><span>I · Seu cenário</span><span>II · Seu contato</span><span>III · Seu guia</span></div>
-      <p>São 8 perguntas rápidas, uma de cada vez. Leva menos de 1 minuto.</p>
+      <p>São 7 perguntas rápidas, uma de cada vez. Leva menos de 1 minuto.</p>
       <a class="btn" href="#form">Começar agora →</a>
       <div class="seal-mini"><img src="assets/selo-garantia.svg" alt=""><span>Seus dados estão seguros · não enviamos spam</span></div>
     </div>
@@ -665,8 +665,7 @@ var Q=[
  {id:'trava',t:'Qual é a sua maior trava hoje?',type:'choice',o:['Vendas paradas, não saem do lugar','Ads caro, queimando dinheiro','Reputação amarela ou laranja','Margem baixa, vendo e não lucro','Anúncios que não convertem','Operação e envios no caos']},
  {id:'trava_det',t:'Quer contar um pouco mais sobre essa trava?',sub:'Opcional. Ajuda o time a chegar com o direcionamento certo.',type:'textarea',ph:'Ex.: vendo bem há 6 meses, mas o faturamento parou em...',opt:true},
  {id:'nome',t:'Qual é o seu nome?',type:'text',ph:'Seu nome',auto:'name'},
- {id:'whatsapp',t:'Qual é o seu WhatsApp com DDD?',sub:'É por aqui que o time vai te enviar o direcionamento.',type:'tel',ph:'(11) 99999-9999',auto:'tel'},
- {id:'consent',t:'Tudo certo, {nome}! Posso enviar seu Guia Estratégico?',type:'consent'}
+ {id:'whatsapp',t:'Último passo, {nome}: qual é o seu WhatsApp com DDD?',sub:'É por aqui que o time vai te enviar o seu Guia Estratégico.',type:'tel',ph:'(11) 99999-9999',auto:'tel',last:true}
 ];
 var A={},i=0,m=document.getElementById('quiz'),body=document.getElementById('qzBody'),bar=document.getElementById('qzBar'),cnt=document.getElementById('qzCount'),back=document.getElementById('qzBack'),lastFocus=null;
 function esc(x){return String(x).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -676,15 +675,14 @@ function render(){
  var t=esc(q.t).replace('{nome}',esc((A.nome||'').split(' ')[0]));
  var h='<h3 class="qz-q" id="qzTitle">'+t+'</h3>'+(q.sub?'<p class="qz-sub">'+esc(q.sub)+'</p>':'');
  if(q.type==='choice'){h+='<div class="qz-opts">'+q.o.map(function(o,k){return'<button type="button" class="qz-opt'+(A[q.id]===o?' sel':'')+'" data-v="'+esc(o)+'"><span>'+String.fromCharCode(65+k)+'</span>'+esc(o)+'</button>'}).join('')+'</div>'}
- else if(q.type==='consent'){h+='<label class="qz-check"><input type="checkbox" id="qzCk"'+(A.consent?' checked':'')+'> <span>Concordo em fornecer meus dados para receber conteúdos e ofertas por WhatsApp, e-mail ou outros meios.</span></label><div class="qz-err" id="qzErr"></div><button type="button" class="btn qz-next" id="qzSend">Garantir meu Guia Estratégico →</button>'}
- else{var tag=q.type==='textarea'?'textarea':'input';h+='<'+tag+' class="qz-in" id="qzIn" '+(tag==='input'?'type="'+(q.type==='tel'?'tel':'text')+'" inputmode="'+(q.type==='tel'?'numeric':'text')+'" autocomplete="'+(q.auto||'off')+'"':'rows="4"')+' placeholder="'+esc(q.ph||'')+'">'+(tag==='textarea'?esc(A[q.id]||''):'')+(tag==='input'?'':'</textarea>')+'<div class="qz-err" id="qzErr"></div><button type="button" class="btn qz-next" id="qzNext">'+(q.opt?'Continuar (ou pular) →':'Continuar →')+'</button><p class="qz-hint">ou pressione Enter ↵</p>'}
+
+ else{var tag=q.type==='textarea'?'textarea':'input';h+='<'+tag+' class="qz-in" id="qzIn" '+(tag==='input'?'type="'+(q.type==='tel'?'tel':'text')+'" inputmode="'+(q.type==='tel'?'numeric':'text')+'" autocomplete="'+(q.auto||'off')+'"':'rows="4"')+' placeholder="'+esc(q.ph||'')+'">'+(tag==='textarea'?esc(A[q.id]||''):'')+(tag==='input'?'':'</textarea>')+'<div class="qz-err" id="qzErr"></div><button type="button" class="btn qz-next" id="qzNext">'+(q.last?'Garantir meu Guia Estratégico →':(q.opt?'Continuar (ou pular) →':'Continuar →'))+'</button>'+(q.last?'<p class="qz-hint">🔒 Seus dados ficam protegidos e são usados apenas para o time falar com você sobre o seu guia.</p>':'<p class="qz-hint">ou pressione Enter ↵</p>')}
  body.innerHTML='<div class="qz-step">'+h+'</div>';
  var inp=document.getElementById('qzIn');
  if(inp){if(inp.tagName==='INPUT')inp.value=A[q.id]||'';if(q.type==='tel')inp.addEventListener('input',function(){inp.value=maskTel(inp.value)});
   inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&(inp.tagName==='INPUT'||!e.shiftKey)){e.preventDefault();next()}});setTimeout(function(){inp.focus()},60);
   document.getElementById('qzNext').onclick=next}
  body.querySelectorAll('.qz-opt').forEach(function(b){b.onclick=function(){A[q.id]=b.getAttribute('data-v');body.querySelectorAll('.qz-opt').forEach(function(x){x.classList.remove('sel')});b.classList.add('sel');setTimeout(function(){go(1)},260)}});
- var sb=document.getElementById('qzSend');if(sb)sb.onclick=submit;
  if(!inp){var f=body.querySelector('.qz-opt,.qz-check input');if(f)setTimeout(function(){f.focus({preventScroll:true})},60)}
 }
 function err(t){var e=document.getElementById('qzErr');if(e)e.textContent=t}
@@ -692,17 +690,17 @@ function next(){var q=Q[i],v=(document.getElementById('qzIn').value||'').trim();
  if(!q.opt&&!v)return err('Preencha para continuar.');
  if(q.type==='tel'&&v.replace(/\D/g,'').length<10)return err('Digite o WhatsApp com DDD.');
  if(q.id==='nome'&&v.length<2)return err('Digite seu nome.');
- A[q.id]=v;go(1)}
+ A[q.id]=v;if(q.last)return submit();go(1)}
 function go(d){i=Math.max(0,Math.min(Q.length-1,i+d));render()}
-function submit(){var ck=document.getElementById('qzCk');if(!ck.checked)return err('Marque a caixa para receber seu guia.');A.consent=true;
+function submit(){
  var data={nome:A.nome,whatsapp:A.whatsapp,vende:A.vende,segmento:A.segmento,fornecedor:A.fornecedor,trava:A.trava,trava_detalhe:A.trava_det||'',origem:location.href,data:new Date().toISOString()};
  try{(window.dataLayer=window.dataLayer||[]).push({event:'lead_quiz',lead:{segmento:data.segmento,vende:data.vende}})}catch(e){}
  if(QUIZ_CONFIG.WEBHOOK){try{fetch(QUIZ_CONFIG.WEBHOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(data),keepalive:true})}catch(e){}}
- bar.style.width='100%';cnt.textContent='Concluído';back.style.visibility='hidden';
  var wa='';if(QUIZ_CONFIG.WHATSAPP){var msg='Olá! Quero meu Guia Estratégico do E-commerce Million.\n\nNome: '+data.nome+'\nWhatsApp: '+data.whatsapp+'\nVende no ML/Shopee: '+data.vende+'\nSegmento: '+data.segmento+'\nFornecedor/estoque: '+data.fornecedor+'\nMaior trava: '+data.trava+(data.trava_detalhe?'\nDetalhe: '+data.trava_detalhe:'');wa='https://wa.me/'+QUIZ_CONFIG.WHATSAPP+'?text='+encodeURIComponent(msg)}
- body.innerHTML='<div class="qz-step qz-done"><img src="assets/selo-garantia.svg" alt="" width="110"><h3 class="qz-q">Recebemos, '+esc(data.nome.split(' ')[0])+'!</h3><p class="qz-sub">O time do Fabrício vai analisar seu cenário e te chamar no WhatsApp <b>'+esc(data.whatsapp)+'</b> com o seu Guia Estratégico.</p>'+(wa?'<a class="btn qz-next" href="'+wa+'" target="_blank" rel="noopener">Falar agora no WhatsApp →</a>':'')+'</div>';
- if(wa)setTimeout(function(){window.open(wa,'_blank')},900)}
-function open(){lastFocus=document.activeElement;m.hidden=false;document.documentElement.classList.add('qz-lock');requestAnimationFrame(function(){m.classList.add('on')});if(cnt.textContent!=='Concluído')render()}
+ try{sessionStorage.setItem('em_lead',JSON.stringify({nome:data.nome,whatsapp:data.whatsapp,wa:wa}))}catch(e){}
+ var nb=document.getElementById('qzNext');if(nb){nb.disabled=true;nb.textContent='Enviando…'}
+ setTimeout(function(){location.href='obrigado.html'},350)}
+function open(){lastFocus=document.activeElement;m.hidden=false;document.documentElement.classList.add('qz-lock');requestAnimationFrame(function(){m.classList.add('on')});render()}
 function close(){m.classList.remove('on');document.documentElement.classList.remove('qz-lock');setTimeout(function(){m.hidden=true},250);if(lastFocus)lastFocus.focus({preventScroll:true})}
 document.querySelectorAll('a[href="#form"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();open()})});
 back.onclick=function(){go(-1)};document.getElementById('qzClose').onclick=close;
