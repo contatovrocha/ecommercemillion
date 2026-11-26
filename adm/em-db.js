@@ -16,7 +16,8 @@
         else if(mode==='signup'&&!r.data.session){m.textContent='Enviamos um e-mail de confirmação. Confirme e depois entre.';mode='login'}
         else await afterLogin(r.data.session)}catch(err){m.textContent='Sem conexão. Tente de novo.'}
       b.disabled=false};
-    setTimeout(function(){var i=document.getElementById('emE');if(i)i.focus()},50);
+    var pe=new URLSearchParams(location.search).get('email');if(pe&&mode==='login'){document.getElementById('emE').value=pe}
+    setTimeout(function(){var i=document.getElementById(pe?'emP':'emE');if(i)i.focus()},50);
   }
   async function afterLogin(session){
     var r=await sb.rpc('em_pode');allowed=!r.error&&r.data===true;
