@@ -23,6 +23,7 @@
     var r=await sb.rpc('em_pode');allowed=!r.error&&r.data===true;
     if(!allowed){await sb.auth.signOut();showGate('Seu e-mail ainda não tem acesso a este painel. Peça ao gestor para liberar.');return}
     if(gate){gate.remove();gate=null}
+    if(window.self!==window.top){resolveReady();return}
     var u=document.createElement('div');u.className='em-user';u.innerHTML='<span>'+esc(session.user.email)+'</span><button type="button">Sair</button>';u.querySelector('button').onclick=async function(){await sb.auth.signOut();location.reload()};document.body.appendChild(u);
     resolveReady();
   }
